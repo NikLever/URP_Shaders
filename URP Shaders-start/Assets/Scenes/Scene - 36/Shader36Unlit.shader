@@ -9,56 +9,67 @@
         _RingScale("Ring Scale", Float) = 0.6
         _Contrast("Contrast", Float) = 4.0
     }
+
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline" }
      
         LOD 100
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-            #include "Assets/hlsl/noiseSimplex.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "noiseSimplex.cginc"
 
-            struct v2f
+            struct Attributes
             {
-                float4 vertex : SV_POSITION;
-                float4 position: TEXCOORD1;
+                float4 positionOS : POSITION;
             };
-            
-            v2f vert (appdata_base v)
+
+            struct Varyings
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.position = v.vertex;
-                return o;
+                float4 positionHCS  : SV_POSITION;
+                float4 positionOS   : TEXCOORD1;
+            
+            };
+
+            Varyings vert (Attributes IN)
+            {
+                Varyings OUT;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.positionOS = IN.positionOS;
+                return OUT;
             }
 
-            fixed4 _PaleColor;
-            fixed4 _DarkColor;
+            CBUFFER_START(UnityPerMaterial)
+
+            float4 _PaleColor;
+            float4 _DarkColor;
             float _Frequency;
             float _NoiseScale;
             float _RingScale;
             float _Contrast;
 
-            float4 frag (v2f i) : COLOR
+            CBUFFER_END
+
+            float4 frag (Varyings i) : COLOR
             {
-                float3 pos = i.position.xyz * 2.0;
+                float3 pos = i.positionOS.xyz * 2.0;
                 float n = snoise( pos );
                 float ring = frac( _Frequency * pos.z + _NoiseScale * n );
                 ring *= _Contrast * ( 1.0 - ring );
 
                 // Adjust ring smoothness and shape, and add some noise
                 float delta = pow( ring, _RingScale ) + n;
-                fixed3 color = lerp(_DarkColor, _PaleColor, delta);
+                float3 color = lerp(_DarkColor, _PaleColor, delta);
 
-                return fixed4( color, 1.0 );
+                return float4( color, 1.0 );
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

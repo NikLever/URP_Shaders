@@ -8,9 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material62
-  m_Shader: {fileID: 4800000, guid: e14e221c3d9c84f408963f20e6b7236e, type: 3}
-  m_ShaderKeywords: _GENERATE_NORMALS_MAP _PARTITIONING_INTEGER _TESSELLATION_FACTOR_CONSTANT
-    _TESSELLATION_SMOOTHING_PHONG
+  m_Shader: {fileID: 4800000, guid: 6cbe3bcb78b5b410eb36a46c653a1ccb, type: 3}
+  m_ShaderKeywords: _PARTITIONING_FRAC_EVEN _TESSELLATION_FACTOR_CONSTANT _TESSELLATION_SMOOTHING_PHONG
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -76,6 +75,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeLength: 386
+    - _FactorEdge2: 1
+    - _FactorInside: 1
     - _FrustumCullTolerance: 0.01
     - _GENERATE_NORMALS: 0
     - _GlossMapScale: 1
@@ -86,7 +87,7 @@ Material:
     - _Mode: 0
     - _NormalStrength: 1
     - _OcclusionStrength: 1
-    - _PARTITIONING: 0
+    - _PARTITIONING: 1
     - _Parallax: 0.02
     - _Phong: 0.83
     - _Radius: 1
@@ -96,9 +97,9 @@ Material:
     - _TESSELLATION_FACTOR: 0
     - _TESSELLATION_SMOOTHING: 1
     - _TessellationBias: 0
-    - _TessellationFactor: 1
+    - _TessellationFactor: 4
     - _TessellationFactorVColors: 0
-    - _TessellationSmoothing: 0.648
+    - _TessellationSmoothing: 0.553
     - _TessellationSmoothingVColors: 0
     - _UVSec: 0
     - _ZWrite: 1
@@ -106,5 +107,6 @@ Material:
     - _CircleColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FactorEdge1: {r: 1.5, g: 1, b: 1, a: 0}
     - _Position: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

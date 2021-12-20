@@ -35,17 +35,21 @@
                 float2 texcoord: TEXCOORD0;
             };
 
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseMap_ST;
+            CBUFFER_END
+
             Varyings vert (Attributes IN)
             {
                 Varyings OUT =(Varyings)0;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.positionOS = IN.positionOS;
-                OUT.uv = IN.texcoord;
+                OUT.uv = TRANSFORM_TEX(IN.texcoord, _BaseMap);
                 return OUT;
             }
-
-            TEXTURE2D(_BaseMap);
-            SAMPLER(sampler_BaseMap);
 
             float4 frag (Varyings IN) : COLOR
             {
