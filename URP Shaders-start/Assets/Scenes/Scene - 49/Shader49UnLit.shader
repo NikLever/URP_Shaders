@@ -3,7 +3,7 @@
     Properties
     {
         _Scale("Scale", Range(0.1, 3)) = 0.3
-        _MainTex("Main Texture", 2D) = "white" {}
+        [NoScaleOffset] _MainTex("Main Texture", 2D) = "white" {}
     }
     SubShader
     {

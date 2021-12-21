@@ -9,6 +9,7 @@
         _RingScale("Ring Scale", Float) = 0.6
         _Contrast("Contrast", Float) = 4.0
     }
+
     SubShader
     {
         Tags { "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline" }
