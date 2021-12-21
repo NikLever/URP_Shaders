@@ -89,19 +89,19 @@
                 return 1.0 - smoothstep(radius, radius + edge_thickness, d);
             }
             
-            half4 frag (Varyings i) : SV_Target
+            half4 frag (Varyings IN) : SV_Target
             {
                 half3 axis_color = half3(0.8, 0.8, 0.8);
                 half3 white = half3(1.0, 1.0, 1.0);
-                half3 color = onLine(i.uv.y, 0.5, 0.002, 0.001) * axis_color;//xAxis
-                color += onLine(i.uv.x, 0.5, 0.002, 0.001) * axis_color;//yAxis
+                half3 color = onLine(IN.uv.y, 0.5, 0.002, 0.001) * axis_color;//xAxis
+                color += onLine(IN.uv.x, 0.5, 0.002, 0.001) * axis_color;//yAxis
                 float2 center = float2(0.5, 0.5);
-                color += circle(i.uv, center, 0.3, 0.002, 0.001) * axis_color;
-                color += circle(i.uv, center, 0.2, 0.002, 0.001) * axis_color;
-                color += circle(i.uv, center, 0.1, 0.002, 0.001) * axis_color;
-                color += sweep(i.uv, center, 0.3, 0.003, 0.001) * half3(0.1, 0.3, 1.0);
-                color += polygon(i.uv, float2(0.9 - sin(_Time.w)*0.05, 0.5), 0.005, 3, 0.0, 0.001) * white;
-                color += polygon(i.uv, float2(0.1 - sin(_Time.w+PI)*0.05, 0.5), 0.005, 3, PI, 0.001) * white; 
+                color += circle(IN.uv, center, 0.3, 0.002, 0.001) * axis_color;
+                color += circle(IN.uv, center, 0.2, 0.002, 0.001) * axis_color;
+                color += circle(IN.uv, center, 0.1, 0.002, 0.001) * axis_color;
+                color += sweep(IN.uv, center, 0.3, 0.003, 0.001) * half3(0.1, 0.3, 1.0);
+                color += polygon(IN.uv, float2(0.9 - sin(_Time.w)*0.05, 0.5), 0.005, 3, 0.0, 0.001) * white;
+                color += polygon(IN.uv, float2(0.1 - sin(_Time.w+PI)*0.05, 0.5), 0.005, 3, PI, 0.001) * white; 
                 
                 return half4(color, 1.0);
             }
