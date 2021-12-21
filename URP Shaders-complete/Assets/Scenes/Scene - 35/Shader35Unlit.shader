@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _MainTex("Main Texture", 2D) = "white" {}
+        _BaseMap("Base Map", 2D) = "white" {}
     }
     SubShader
     {
@@ -22,11 +22,10 @@
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            struct v2f
+            struct Varyings
             {
-                float4 vertex : SV_POSITION;
-                float4 screenPos: TEXCOORD2;
-                float4 position: TEXCOORD1;
+                float4 positionHCS : SV_POSITION;
+                float4 positionOS: TEXCOORD1;
                 float2 uv: TEXCOORD0;
             };
 
@@ -36,48 +35,45 @@
                 float2 texcoord: TEXCOORD0;
             };
 
-            inline float4 ScreenPosFromHCS(float4 pos) {
-                float4 o = pos * 0.5f;
-                o.xy = float2(o.x, o.y*_ProjectionParams.x) + o.w;
-                o.zw = pos.zw;
-                return o;
-            }
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
 
-            v2f vert (Attributes v)
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseMap_ST;
+            CBUFFER_END
+
+            Varyings vert (Attributes IN)
             {
-                v2f o;
-                o.vertex = TransformObjectToHClip(v.positionOS.xyz);
-                o.screenPos = ScreenPosFromHCS(o.vertex);
-                o.position = v.positionOS;
-                o.uv = v.texcoord;
-                return o;
+                Varyings OUT =(Varyings)0;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.positionOS = IN.positionOS;
+                OUT.uv = TRANSFORM_TEX(IN.texcoord, _BaseMap);
+                return OUT;
             }
 
-            sampler2D _MainTex;
-
-            float4 frag (v2f i) : COLOR
+            float4 frag (Varyings IN) : COLOR
             {
                 float2 uv;
                 float2 noise = float2(0,0);
-
+                
                 // Generate noisy y value
-                uv = float2(i.uv.x*0.7 - 0.01, frac(i.uv.y - _Time.y*0.27));
-                noise.y = (tex2D(_MainTex, uv).a-0.5)*2.0;
-                uv = float2(i.uv.x*0.45 + 0.033, frac(i.uv.y*1.9 - _Time.y*0.61));
-                noise.y += (tex2D(_MainTex, uv).a-0.5)*2.0;
-                uv = float2(i.uv.x*0.8 - 0.02, frac(i.uv.y*2.5 - _Time.y*0.51));
-                noise.y += (tex2D(_MainTex, uv).a-0.5)*2.0;
+                uv = float2(IN.uv.x*0.7 - 0.01, frac(IN.uv.y - _Time.y*0.27));
+                noise.y = (SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv).a-0.5)*2.0;
+                uv = float2(IN.uv.x*0.45 + 0.033, frac(IN.uv.y*1.9 - _Time.y*0.61));
+                noise.y += (SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv).a-0.5)*2.0;
+                uv = float2(IN.uv.x*0.8 - 0.02, frac(IN.uv.y*2.5 - _Time.y*0.51));
+                noise.y += (SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv).a-0.5)*2.0;
 
                 noise = clamp(noise, -1.0, 1.0);
 
-                float perturb = (1.0 - i.uv.y) * 0.35 + 0.02;
-                noise = (noise * perturb) + i.uv - 0.02;
+                float perturb = (1.0 - IN.uv.y) * 0.35 + 0.02;
+                noise = (noise * perturb) + IN.uv - 0.02;
 
-                float4 color = tex2D(_MainTex, noise);
+                float4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, noise);
                 color = half4(color.r*2.0, color.g*0.9, (color.g/color.r)*0.2, 1.0);
                 noise = clamp(noise, 0.05, 1.0);
-                color.a = tex2D(_MainTex, noise).b*2.0;
-                color.a = color.a*tex2D(_MainTex, i.uv).b;
+                color.a = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, noise).b*2.0;
+                color.a = color.a*SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv).b;
 
                 return color;
             }

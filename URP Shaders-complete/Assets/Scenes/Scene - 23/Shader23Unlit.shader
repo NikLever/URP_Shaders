@@ -16,8 +16,6 @@
             #pragma vertex vert
             #pragma fragment frag
 
-            #define PI2 6.28318530718
-
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct Attributes
@@ -28,27 +26,18 @@
 
             struct Varyings
             {
-                float4 vertex : SV_POSITION;
-                float4 screenPos: TEXCOORD2;
-                float4 position: TEXCOORD1;
+                float4 positionHCS : SV_POSITION;
+                float4 screenPos: TEXCOORD1;
                 float2 uv: TEXCOORD0;
             };
 
-            inline float4 ScreenPosFromHCS(float4 pos) {
-                float4 o = pos * 0.5f;
-                o.xy = float2(o.x, o.y*_ProjectionParams.x) + o.w;
-                o.zw = pos.zw;
-                return o;
-            }
-
             Varyings vert (Attributes IN)
             {
-                Varyings o;
-                o.vertex = TransformObjectToHClip(IN.positionOS.xyz);
-                o.screenPos = ScreenPosFromHCS(o.vertex);
-                o.position = IN.positionOS;
-                o.uv = IN.texcoord;
-                return o;
+                Varyings OUT;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+                OUT.screenPos.xyz = ComputeNormalizedDeviceCoordinatesWithZ(OUT.positionHCS);
+                OUT.uv = IN.texcoord;
+                return OUT;
             }
 
             CBUFFER_START(UnityPerMaterial)
@@ -77,7 +66,7 @@
 
                 // Angle and radius from the current pixel
                 float theta = atan2(pt.y, pt.x) + rotate;
-                float rad = PI2/float(sides);
+                float rad = TWO_PI/float(sides);
 
                 // Shaping function that modulate the distance
                 float d = cos(floor(0.5 + theta/rad)*rad-theta)*length(pt);
@@ -85,9 +74,9 @@
                 return 1.0 - smoothstep(radius, radius + edge_thickness, d);
             }
             
-            half4 frag (Varyings i) : SV_Target
+            half4 frag (Varyings IN) : SV_Target
             {
-                float2 pt = i.screenPos.xy * _ScreenParams.xy;
+                float2 pt = IN.screenPos.xy * _ScreenParams.xy;
                 float2 center = _ScreenParams.xy * 0.5;
                 float radius = 80.0;
                 half3 color = polygon(pt, center, radius, _Sides, 0.0, 1.0) * half3(1.0, 1.0, 0.0);

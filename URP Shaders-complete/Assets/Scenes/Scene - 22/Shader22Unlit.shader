@@ -15,10 +15,6 @@
             #pragma vertex vert
             #pragma fragment frag
 
-            //#define PI 3.14159265359
-            #define PI2 6.28318530718
-
-
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 
@@ -31,8 +27,8 @@
             struct Varyings
             {
                 float4 positionHCS  : SV_POSITION;
-                float4 positionOS: TEXCOORD1;
-                float2 uv: TEXCOORD0;
+                float4 positionOS   : TEXCOORD1;
+                float2 uv           : TEXCOORD0;
             };
             
             Varyings vert (Attributes IN)
@@ -60,7 +56,7 @@
                 const float gradient_angle = PI * 0.2;
 
                 if (length(d)<radius){
-                    float angle = fmod(theta + atan2(d.y, d.x), PI2);
+                    float angle = fmod(theta + atan2(d.y, d.x), TWO_PI);//PI2);
                     gradient = clamp(gradient_angle - angle, 0.0, gradient_angle)/gradient_angle * 0.5;
                 }
 
@@ -85,7 +81,7 @@
 
                 // Angle and radius from the current pixel
                 float theta = atan2(pt.y, pt.x) + rotate;
-                float rad = PI2/float(sides);
+                float rad = TWO_PI/float(sides);
 
                 // Shaping function that modulate the distance
                 float d = cos(floor(0.5 + theta/rad)*rad-theta)*length(pt);
