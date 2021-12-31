@@ -29,13 +29,13 @@
 
             CBUFFER_END
         
-            half4 LightingRamp (float3 normal, half atten) {
+            half4 LightingRamp (float3 normal) {
                 Light light = GetMainLight();
                 half NdotL = dot (normal, light.direction);
                 half diff = pow(NdotL * 0.5 + 0.5, 2.0);
                 half3 ramp = floor(diff * _LevelCount)/_LevelCount;
                 half4 c;
-                c.rgb = _Color * light.color.rgb * ramp * atten;
+                c.rgb = _Color * light.color.rgb * ramp;
                 c.a = 1.0;
                 return c;
             }
@@ -43,24 +43,19 @@
             struct Attributes
             {
                 float4 positionOS : POSITION;
-                float2 texcoord   : TEXCOORD0;
                 float3 normal     : NORMAL;
             };
 
             struct Varyings
             {
-                float4 vertex : SV_POSITION;
-                float2 uv: TEXCOORD0;
-                float4 position: TEXCOORD1;
+                float4 positionCS : SV_POSITION;
                 float3 normal : NORMAL;
             };
      
             Varyings vert (Attributes IN)
             {
                 Varyings OUT;
-                OUT.vertex = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = IN.texcoord;
-                OUT.position = IN.positionOS;
+                OUT.positionCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.normal = IN.normal;
                 return OUT;
             }
@@ -68,7 +63,7 @@
             
 
             half4 frag(Varyings IN) : SV_Target {
-	            return LightingRamp(IN.normal, 1.0);
+	            return LightingRamp(IN.normal);
             }           
 
             ENDHLSL
