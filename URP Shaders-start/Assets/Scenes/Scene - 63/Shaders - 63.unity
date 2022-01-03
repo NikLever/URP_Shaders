@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7196774, g: 0.7428601, b: 0.6773495, a: 1}
+  m_IndirectSpecularColor: {r: 0.6730599, g: 0.70450467, b: 0.59443456, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -468,7 +468,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e88cb4b60cf754c64b6af5691e52a098, type: 2}
+      objectReference: {fileID: 2100000, guid: ada30c88b83cd497ca0539ef44a80f3b, type: 2}
     - target: {fileID: -927199367670048503, guid: 0e5d90547d90c4fa5bb97466d8200a7a,
         type: 3}
       propertyPath: m_Name
@@ -477,7 +477,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 0e5d90547d90c4fa5bb97466d8200a7a,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e5d90547d90c4fa5bb97466d8200a7a, type: 3}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 1897068739}
   - component: {fileID: 1897068738}
   - component: {fileID: 1897068737}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c20979ba7a1c46a59670abd242796d7, type: 2}
+  - {fileID: 2100000, guid: 5e41cbfc0448c42f5912e893322e4b41, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

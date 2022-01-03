@@ -102,7 +102,7 @@ Material:
     - _RimPower: 0.5
     - _RimStrength: 3.9
     - _RimWidth: 0.48
-    - _Rim_Intensity: 0.279
+    - _Rim_Intensity: 0.388
     - _Rim_Strength: 3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

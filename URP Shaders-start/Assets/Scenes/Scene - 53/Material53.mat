@@ -8,18 +8,24 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material53
-  m_Shader: {fileID: 4800000, guid: 8bd627b0d31d049169fe3891a0fe8ee8, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+    _SPECULAR_SETUP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
+        m_Texture: {fileID: 2800000, guid: cee6e6f697add429fb73e14a415946db, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
         m_Texture: {fileID: 2800000, guid: cee6e6f697add429fb73e14a415946db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,6 +73,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 2800000, guid: af32fd081e5c74f04a4b38b84a825fc7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -81,10 +91,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
+    - _Blend: 0
     - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
     - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 0.29
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _Gaps: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -92,27 +109,33 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _NormalMapStrength: 2
-    - _Normal_Map_Strength: 2
+    - _Normal_Map_Strength: 8
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _Reveal_Time: 0
     - _RimPower: 0.5
     - _RimStrength: 3.9
     - _RimWidth: 0.48
-    - _Rim_Intensity: 0.279
+    - _Rim_Intensity: 0.24
     - _Rim_Strength: 3
-    - _SmoothnessTextureChannel: 0
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Surface: 0
     - _UVSec: 0
+    - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0.6981132, g: 0.44455323, b: 0.44455323, a: 0}
     - _Rim_Color: {r: 0.8867924, g: 0.53960484, b: 0.53960484, a: 0}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2528537756628350399
 MonoBehaviour:
