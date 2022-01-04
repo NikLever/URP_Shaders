@@ -9,7 +9,6 @@
 		}
 
 		Pass {
-			ColorMask 0
 			ZWrite Off
 
 			HLSLPROGRAM
