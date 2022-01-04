@@ -30,7 +30,7 @@
             struct Varyings
             {
                 float4 positionHCS  : SV_POSITION;
-                float4 screenPos    : TEXCOORD2;
+                float3 screenPos    : TEXCOORD2;
                 float2 uv           : TEXCOORD0;
                 float4 noise        : TEXCOORD1;
             };
