@@ -151,7 +151,7 @@
                 "m_Node": {
                     "m_Id": "db105c9476754c0b83f8164db356d199"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 1
             }
         },
         {
@@ -319,7 +319,7 @@
                 "m_Node": {
                     "m_Id": "db105c9476754c0b83f8164db356d199"
                 },
-                "m_SlotId": 1
+                "m_SlotId": 0
             }
         },
         {
@@ -2329,7 +2329,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "refracted (Custom Function)",
+    "m_Name": "refract (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -2365,7 +2365,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 1,
-    "m_FunctionName": "refracted",
+    "m_FunctionName": "refract",
     "m_FunctionSource": "b061d25af60334e4d87575bfa3415478",
     "m_FunctionBody": "_out = refract(view, normal, ior);"
 }
