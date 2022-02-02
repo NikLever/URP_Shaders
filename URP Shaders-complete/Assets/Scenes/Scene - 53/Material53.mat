@@ -102,7 +102,7 @@ Material:
     - _RimPower: 0.5
     - _RimStrength: 3.9
     - _RimWidth: 0.48
-    - _Rim_Intensity: 0.388
+    - _Rim_Intensity: 1
     - _Rim_Strength: 3
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -113,7 +113,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0.6981132, g: 0.44455323, b: 0.44455323, a: 0}
-    - _Rim_Color: {r: 0.8867924, g: 0.53960484, b: 0.53960484, a: 0}
+    - _Rim_Color: {r: 0.58293676, g: 0.5411765, b: 0.8862745, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2528537756628350399
 MonoBehaviour:
