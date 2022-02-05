@@ -94,23 +94,23 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IOR: 1.66
+    - _IOR: 0.11
     - _Magnitude: 0.146
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Power: 1.27
+    - _Power: 3.09
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Radius: 0.4
     - _ReflectionStrength: 0.278
-    - _Smoothness: 0.482
+    - _Smoothness: 0.387
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TintStrength: 0.617
-    - _Transparency: 0
+    - _Transparency: 0.116
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
