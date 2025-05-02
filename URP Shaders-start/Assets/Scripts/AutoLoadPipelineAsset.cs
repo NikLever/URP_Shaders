@@ -12,7 +12,7 @@ public class AutoLoadPipelineAsset : MonoBehaviour
     {
         if (pipelineAsset)
         {
-            GraphicsSettings.renderPipelineAsset = pipelineAsset;
+            GraphicsSettings.defaultRenderPipeline = pipelineAsset;
         }   
     }
 }

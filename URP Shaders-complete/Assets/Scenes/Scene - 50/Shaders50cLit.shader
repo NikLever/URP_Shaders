@@ -147,7 +147,9 @@ Shader "NiksShaders/Shader50cLit" {
 
             half4 MyLitPassFragment(Varyings IN) : SV_Target
             {
-                half4 color = LitPassFragment(IN);
+
+                half4 color;
+                LitPassFragment(IN, color);
 
                 //Do custom work
                 clip(frac(IN.positionWS.y * 10) - 0.5 );
