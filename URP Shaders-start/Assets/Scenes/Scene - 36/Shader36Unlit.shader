@@ -23,7 +23,7 @@
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "noiseSimplex.cginc"
+            #include "../../hlsl/noiseSimplex.hlsl"
 
             struct Attributes
             {
